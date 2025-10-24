@@ -6,8 +6,17 @@ import Header from "@/components/layout/Header";
 import HeroSection from "@/components/sections/HeroSection";
 import IntroductionSection from "@/components/sections/IntroductionSection";
 import DestinationSection from "@/components/sections/DestinationSection";
-import ResidencesSection from "@/components/sections/ResidencesSection"; // Import the new component
+import ResidencesSection from "@/components/sections/ResidencesSection";
+import AmenitiesSection from "@/components/sections/AmenitiesSection";
 import { smoothScrollTo } from "@/lib/scroll";
+import {
+  Dumbbell,
+  SwimmingPool, // Corrected back to SwimmingPool
+  Coffee,
+  Leaf,
+  Car,
+  ShieldCheck,
+} from "lucide-react";
 
 const Index = () => {
   // Placeholder data - these will eventually come from CMS
@@ -15,7 +24,7 @@ const Index = () => {
     hero_headline: "Experience Unrivalled Luxury Living",
     hero_subheadline: "Discover Solaya, an exclusive collection of residences designed for the discerning few.",
     hero_cta_label: "Register Your Interest",
-    hero_media_url: "https://videos.meraas.com/solaya/solaya-hero-video.mp4", // Example video URL
+    hero_media_url: "https://videos.meraas.com/solaya/solaya-hero-video.mp4",
   };
 
   const introData = {
@@ -26,8 +35,8 @@ const Index = () => {
     `,
     intro_button_label: "Discover More",
     intro_images: [
-      "https://www.meraas.com/-/media/project/meraassite/solaya/solaya-intro-1.jpg", // Placeholder image
-      "https://www.meraas.com/-/media/project/meraassite/solaya/solaya-intro-2.jpg", // Placeholder image
+      "https://www.meraas.com/-/media/project/meraassite/solaya/solaya-intro-1.jpg",
+      "https://www.meraas.com/-/media/project/meraassite/solaya/solaya-intro-2.jpg",
     ],
   };
 
@@ -48,7 +57,7 @@ const Index = () => {
       { name: "Business Bay", distance: "7 km", time: "12 min drive" },
       { name: "DIFC", distance: "8 km", time: "15 min drive" },
     ],
-    background_image_url: "https://www.meraas.com/-/media/project/meraassite/solaya/solaya-destination-bg.jpg", // Placeholder background image
+    background_image_url: "https://www.meraas.com/-/media/project/meraassite/solaya/solaya-destination-bg.jpg",
   };
 
   const residencesData = {
@@ -78,6 +87,43 @@ const Index = () => {
         type: "4 Bedroom Penthouse",
         size: "3,500 sqft",
         description: "The pinnacle of luxury, featuring expansive layouts and private terraces.",
+      },
+    ],
+  };
+
+  const amenitiesData = {
+    amenities_title: "World-Class Amenities at Your Doorstep",
+    amenities_paragraph: "Solaya offers an array of exclusive amenities designed to enhance your lifestyle and provide ultimate convenience and relaxation.",
+    amenity_list: [
+      {
+        icon: Dumbbell,
+        title: "State-of-the-Art Gym",
+        description: "Fully equipped fitness center with personal trainers available.",
+      },
+      {
+        icon: SwimmingPool, // Corrected back to SwimmingPool
+        title: "Infinity Pool",
+        description: "Relax by the stunning infinity pool with breathtaking city views.",
+      },
+      {
+        icon: Coffee,
+        title: "Gourmet Cafe",
+        description: "Enjoy artisanal coffee and light bites in a sophisticated setting.",
+      },
+      {
+        icon: Leaf,
+        title: "Lush Green Parks",
+        description: "Beautifully landscaped gardens and serene green spaces for relaxation.",
+      },
+      {
+        icon: Car,
+        title: "Valet Parking",
+        description: "Convenient and secure valet parking services for residents and guests.",
+      },
+      {
+        icon: ShieldCheck,
+        title: "24/7 Security",
+        description: "Round-the-clock security and concierge services for peace of mind.",
       },
     ],
   };
@@ -115,10 +161,11 @@ const Index = () => {
         residencesParagraph={residencesData.residences_paragraph}
         residenceList={residencesData.residence_list}
       />
-      {/* Placeholder for other sections */}
-      <section id="amenities" className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <h2 className="text-4xl font-bold text-primary">Amenities Section (Coming Soon)</h2>
-      </section>
+      <AmenitiesSection
+        amenitiesTitle={amenitiesData.amenities_title}
+        amenitiesParagraph={amenitiesData.amenities_paragraph}
+        amenityList={amenitiesData.amenity_list}
+      />
       <section id="register" className="min-h-screen bg-white flex items-center justify-center">
         <h2 className="text-4xl font-bold text-primary">Register Your Interest Form (Coming Soon)</h2>
       </section>
