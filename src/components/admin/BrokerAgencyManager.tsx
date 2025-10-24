@@ -41,7 +41,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import Papa from 'papaparse';
+import Papa, { ParseResult } from 'papaparse'; // Import ParseResult
 
 interface BrokerAgency {
   id: string;
@@ -177,10 +177,10 @@ const BrokerAgencyManager: React.FC = () => {
     Papa.parse(csvFile, {
       header: true,
       skipEmptyLines: true,
-      complete: async (results) => {
+      complete: async (results: ParseResult<any>) => { // Explicitly type results
         const newAgencies: { name: string }[] = results.data.map((row: any) => ({
           name: row.name?.trim(),
-        })).filter(agency => agency.name); // Filter out rows with empty names
+        })).filter((agency: { name: string }) => agency.name); // Explicitly type agency
 
         if (newAgencies.length === 0) {
           showError("No valid agency names found in the CSV.");
