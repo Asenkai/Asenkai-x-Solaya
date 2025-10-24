@@ -6,24 +6,26 @@ import ResidencesSection from "@/components/sections/ResidencesSection";
 import AmenitiesSection from "@/components/sections/AmenitiesSection";
 import RegisterSection from "@/components/sections/RegisterSection";
 import DestinationSection from "@/components/sections/DestinationSection";
+import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton"; // Import new component
 import { smoothScrollTo } from "@/lib/scroll";
 import { navigationLinks } from "@/data/landingPageData";
-import { useCMS } from "@/contexts/CMSContext"; // Import useCMS
-import React from "react"; // Import React for useEffect
+import { useCMS } from "@/contexts/CMSContext";
+import React from "react";
 
 const Index = () => {
-  const { globalCopy, loading, error } = useCMS(); // Use the CMS context
+  const { globalCopy, loading, error } = useCMS();
 
   const handleNavigate = (id: string) => {
     smoothScrollTo(id);
   };
 
-  // Debugging logs for CMS data
   React.useEffect(() => {
     if (globalCopy) {
       console.log("Index.tsx - globalCopy.hero_media_url:", globalCopy.hero_media_url);
       console.log("Index.tsx - globalCopy.intro_images:", globalCopy.intro_images);
       console.log("Index.tsx - globalCopy.destination_background_image_url:", globalCopy.destination_background_image_url);
+      console.log("Index.tsx - globalCopy.whatsapp_number:", globalCopy.whatsapp_number); // Debug log
+      console.log("Index.tsx - globalCopy.brochure_url:", globalCopy.brochure_url); // Debug log
     }
   }, [globalCopy]);
 
@@ -46,7 +48,12 @@ const Index = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header onNavigate={handleNavigate} navigationLinks={navigationLinks} />
+      <Header
+        onNavigate={handleNavigate}
+        navigationLinks={navigationLinks}
+        whatsappNumber={globalCopy.whatsapp_number} // Pass to Header
+        brochureUrl={globalCopy.brochure_url} // Pass to Header
+      />
       <main className="flex-grow">
         <HeroSection
           onRegisterClick={() => handleNavigate("register")}
@@ -81,6 +88,9 @@ const Index = () => {
         />
         <RegisterSection />
       </main>
+      {globalCopy.whatsapp_number && (
+        <FloatingWhatsAppButton whatsappNumber={globalCopy.whatsapp_number} />
+      )}
       <MadeWithDyad />
     </div>
   );

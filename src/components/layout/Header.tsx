@@ -4,6 +4,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import MobileNav from "./MobileNav";
+import { MessageCircle, Download } from "lucide-react"; // Changed Whatsapp to MessageCircle
 
 interface NavLink {
   id: string;
@@ -13,9 +14,11 @@ interface NavLink {
 interface HeaderProps {
   onNavigate: (id: string) => void;
   navigationLinks: NavLink[];
+  whatsappNumber: string | null; // Added
+  brochureUrl: string | null; // Added
 }
 
-const Header: React.FC<HeaderProps> = ({ onNavigate, navigationLinks }) => {
+const Header: React.FC<HeaderProps> = ({ onNavigate, navigationLinks, whatsappNumber, brochureUrl }) => {
   const [isScrolled, setIsScrolled] = React.useState(false);
 
   React.useEffect(() => {
@@ -25,6 +28,8 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, navigationLinks }) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const whatsappLink = whatsappNumber ? `https://wa.me/${whatsappNumber.replace(/\D/g, '')}` : '#';
 
   return (
     <header
@@ -57,13 +62,45 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, navigationLinks }) => {
             </li>
           ))}
         </ul>
-        <Button className={cn("hidden md:block", isScrolled ? "bg-primary text-white hover:bg-primary/90" : "bg-white text-primary hover:bg-gray-100")} onClick={() => onNavigate("register")}>
-          Register Now
-        </Button>
+        <div className="hidden md:flex items-center space-x-4"> {/* Group buttons */}
+          {brochureUrl && (
+            <a href={brochureUrl} target="_blank" rel="noopener noreferrer">
+              <Button
+                className={cn(
+                  isScrolled ? "bg-secondary text-primary hover:bg-secondary/80" : "bg-white text-primary hover:bg-gray-100",
+                  "text-base px-6 py-3 rounded-full font-semibold"
+                )}
+              >
+                <Download className="mr-2 h-4 w-4" /> Download Brochure
+              </Button>
+            </a>
+          )}
+          {whatsappNumber && (
+            <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+              <Button
+                className={cn(
+                  isScrolled ? "bg-green-500 text-white hover:bg-green-600" : "bg-green-500 text-white hover:bg-green-600",
+                  "text-base px-6 py-3 rounded-full font-semibold"
+                )}
+              >
+                <MessageCircle className="mr-2 h-4 w-4" /> WhatsApp
+              </Button>
+            </a>
+          )}
+          <Button className={cn(isScrolled ? "bg-primary text-white hover:bg-primary/90" : "bg-white text-primary hover:bg-gray-100", "text-base px-6 py-3 rounded-full font-semibold")} onClick={() => onNavigate("register")}>
+            Register Now
+          </Button>
+        </div>
 
         {/* Mobile Navigation */}
         <div className="md:hidden">
-          <MobileNav onNavigate={onNavigate} isScrolled={isScrolled} navigationLinks={navigationLinks} />
+          <MobileNav
+            onNavigate={onNavigate}
+            isScrolled={isScrolled}
+            navigationLinks={navigationLinks}
+            whatsappNumber={whatsappNumber} // Pass to MobileNav
+            brochureUrl={brochureUrl} // Pass to MobileNav
+          />
         </div>
       </nav>
     </header>

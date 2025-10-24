@@ -3,7 +3,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Menu, MessageCircle, Download } from "lucide-react"; // Changed Whatsapp to MessageCircle
 import { cn } from "@/lib/utils";
 
 interface NavLink {
@@ -15,15 +15,19 @@ interface MobileNavProps {
   onNavigate: (id: string) => void;
   isScrolled: boolean;
   navigationLinks: NavLink[];
+  whatsappNumber: string | null; // Added
+  brochureUrl: string | null; // Added
 }
 
-const MobileNav: React.FC<MobileNavProps> = ({ onNavigate, isScrolled, navigationLinks }) => {
+const MobileNav: React.FC<MobileNavProps> = ({ onNavigate, isScrolled, navigationLinks, whatsappNumber, brochureUrl }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleLinkClick = (id: string) => {
     onNavigate(id);
     setIsOpen(false); // Close the sheet after navigation
   };
+
+  const whatsappLink = whatsappNumber ? `https://wa.me/${whatsappNumber.replace(/\D/g, '')}` : '#';
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -52,6 +56,28 @@ const MobileNav: React.FC<MobileNavProps> = ({ onNavigate, isScrolled, navigatio
               {link.label}
             </Button>
           ))}
+          {brochureUrl && (
+            <a href={brochureUrl} target="_blank" rel="noopener noreferrer" className="w-full">
+              <Button
+                variant="ghost"
+                className="text-lg justify-start text-primary w-full"
+                onClick={() => setIsOpen(false)} // Close sheet on click
+              >
+                <Download className="mr-3 h-5 w-5" /> Download Brochure
+              </Button>
+            </a>
+          )}
+          {whatsappNumber && (
+            <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="w-full">
+              <Button
+                variant="ghost"
+                className="text-lg justify-start text-green-600 w-full"
+                onClick={() => setIsOpen(false)} // Close sheet on click
+              >
+                <MessageCircle className="mr-3 h-5 w-5" /> WhatsApp
+              </Button>
+            </a>
+          )}
           <Button className="bg-primary text-white hover:bg-primary/90 text-lg px-8 py-6 rounded-full font-semibold mt-4" onClick={() => handleLinkClick("register")}>
             Register Now
           </Button>

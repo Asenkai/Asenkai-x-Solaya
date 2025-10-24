@@ -52,6 +52,8 @@ interface GlobalCopy {
   terms_url: string;
   cookies_url: string;
   gtm_container_id: string;
+  whatsapp_number: string | null; // Added WhatsApp number
+  brochure_url: string | null; // Added Brochure URL
 }
 
 interface ToolkitImage {
