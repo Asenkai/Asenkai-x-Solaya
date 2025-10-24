@@ -4,8 +4,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import { CMSProvider, useCMS } from "@/contexts/CMSContext"; // Corrected import path
+import { CMSProvider, useCMS } from "@/contexts/CMSContext";
+import { SessionProvider, useSession } from "@/contexts/SessionContext";
 import React, { useEffect } from "react";
+import AdminLogin from "@/pages/admin/Login";
+import AdminLayout from "@/components/layout/AdminLayout";
+import LeadsList from "@/pages/admin/LeadsList";
+import AdminSettings from "@/pages/admin/Settings";
 
 const queryClient = new QueryClient();
 
@@ -45,20 +50,21 @@ const GTMInjector: React.FC = () => {
 
 
 const AppContent = () => {
-  const { loading, error } = useCMS();
+  const { loading: cmsLoading, error: cmsError } = useCMS();
+  const { loading: sessionLoading } = useSession();
 
-  if (loading) {
+  if (cmsLoading || sessionLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-xl text-gray-700">Loading content...</p>
+        <p className="text-xl text-gray-700">Loading application...</p>
       </div>
     );
   }
 
-  if (error) {
+  if (cmsError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-xl text-red-500">Error: {error}</p>
+        <p className="text-xl text-red-500">Error: {cmsError}</p>
       </div>
     );
   }
@@ -69,6 +75,12 @@ const AppContent = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<LeadsList />} />
+            <Route path="leads" element={<LeadsList />} />
+            <Route path="settings" element={<AdminSettings />} />
+          </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -82,7 +94,9 @@ const App = () => (
     <TooltipProvider>
       <Sonner />
       <CMSProvider>
-        <AppContent />
+        <SessionProvider>
+          <AppContent />
+        </SessionProvider>
       </CMSProvider>
     </TooltipProvider>
   </QueryClientProvider>
