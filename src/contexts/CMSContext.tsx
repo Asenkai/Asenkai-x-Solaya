@@ -28,6 +28,11 @@ interface AmenityItem {
   description: string;
 }
 
+interface ExperienceItem { // NEW INTERFACE
+  title: string;
+  imageUrl: string;
+}
+
 interface GlobalCopy {
   hero_headline: string;
   hero_subheadline: string;
@@ -48,6 +53,7 @@ interface GlobalCopy {
   experience_title: string;
   experience_paragraph: string;
   amenity_list: AmenityItem[]; // Added
+  experience_gallery: ExperienceItem[]; // NEW FIELD
   privacy_url: string;
   terms_url: string;
   cookies_url: string;
