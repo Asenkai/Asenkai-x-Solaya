@@ -34,7 +34,6 @@ const Index = () => {
       console.log("Index.tsx - globalCopy.privacy_url:", globalCopy.privacy_url); // Debug log
       console.log("Index.tsx - globalCopy.terms_url:", globalCopy.terms_url); // Debug log
       console.log("Index.tsx - globalCopy.cookies_url:", globalCopy.cookies_url); // Debug log
-      console.log("Index.tsx - globalCopy.residence_list:", globalCopy.residence_list); // Added log for residence_list
     }
   }, [globalCopy]);
 
