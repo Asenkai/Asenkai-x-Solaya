@@ -11,7 +11,7 @@ import AmenitiesSection from "@/components/sections/AmenitiesSection";
 import { smoothScrollTo } from "@/lib/scroll";
 import {
   Dumbbell,
-  Pool, // Corrected to Pool
+  Droplet, // Changed from Pool to Droplet to resolve export error
   Coffee,
   Leaf,
   Car,
@@ -101,7 +101,7 @@ const Index = () => {
         description: "Fully equipped fitness center with personal trainers available.",
       },
       {
-        icon: Pool, // Corrected to Pool
+        icon: Droplet, // Changed from Pool to Droplet
         title: "Infinity Pool",
         description: "Relax by the stunning infinity pool with breathtaking city views.",
       },
