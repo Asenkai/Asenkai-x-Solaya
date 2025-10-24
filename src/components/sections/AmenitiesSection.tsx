@@ -29,7 +29,7 @@ const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({
   amenityList,
 }) => {
   return (
-    <section id="amenities" className="py-20 px-4 md:px-8 bg-gray-50">
+    <section id="amenities" className="py-16 px-4 md:px-8 bg-gray-50">
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold leading-tight tracking-tighter text-primary mb-6">

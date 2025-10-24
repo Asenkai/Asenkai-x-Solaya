@@ -32,7 +32,7 @@ const ExperienceSolayaSection: React.FC<ExperienceSolayaSectionProps> = ({
   };
 
   return (
-    <section id="experience" className="py-20 px-4 md:px-8 bg-white">
+    <section id="experience" className="py-16 px-4 md:px-8 bg-white">
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold leading-tight tracking-tighter text-primary mb-6">
