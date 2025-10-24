@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "cross-env VITE_SUPABASE_URL=http://localhost:54321 VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp5ZWJqeXBqeGdxanhwdnlyem5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyNDYyNzksImV4cCI6MjA3NjgyMjI3OX0.gZluKDy3flqXxdqowEGlQxyHrc5-pMxWta2r-lZ916c VITE_SUPABASE_FUNCTIONS_URL=http://localhost:54321/functions/v1 vite",
-    "build": "cross-env VITE_SUPABASE_URL=https://jyebjypjxgqjxpvyrznd.supabase.co VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp5ZWJqeXBqeGdxanhwdnlycm5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyNDYyNzksImV4cCI6MjA3NjgyMjI3OX0.gZluKDy3flqXxdqowEGlQxyHrc5-pMxWta2r-lZ916c VITE_SUPABASE_FUNCTIONS_URL=https://jyebjypjxgqjxpvyrznd.supabase.co/functions/v1 vite build",
+    "dev": "cross-env VITE_SUPABASE_URL=http://127.0.0.1:54321 VITE_SUPABASE_ANON_KEY=sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH VITE_SUPABASE_FUNCTIONS_URL=http://localhost:54321/functions/v1 vite",
+    "build": "cross-env VITE_SUPABASE_URL=https://jyebjypjxgqjxpvyrznd.supabase.co VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFhc2UiLCJyZWYiOiJqeWVianlwamxnY2p4cHZ5cnpuZCIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNzYxMjQ2Mjc5LCJleHAiOjIwNzY4MjIyNzl9.gZluKDy3flqXxdqowEGlQxyHrc5-pMxWta2r-lZ916c VITE_SUPABASE_FUNCTIONS_URL=https://jyebjypjxgqjxpvyrznd.supabase.co/functions/v1 vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"
