@@ -57,6 +57,7 @@ interface GlobalCopy {
   brochure_callout_headline: string | null; // New field
   brochure_callout_description: string | null; // New field
   brochure_callout_cta_label: string | null; // New field
+  master_plan_image_url: string | null; // NEW FIELD
 }
 
 interface ToolkitImage {

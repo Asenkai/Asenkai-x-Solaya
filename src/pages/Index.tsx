@@ -7,8 +7,9 @@ import AmenitiesSection from "@/components/sections/AmenitiesSection";
 import RegisterSection from "@/components/sections/RegisterSection";
 import DestinationSection from "@/components/sections/DestinationSection";
 import BrochureCalloutSection from "@/components/sections/BrochureCalloutSection";
+import MasterPlanSection from "@/components/sections/MasterPlanSection"; // NEW IMPORT
 import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
-import Footer from "@/components/layout/Footer"; // Import the new Footer component
+import Footer from "@/components/layout/Footer";
 import { smoothScrollTo } from "@/lib/scroll";
 import { navigationLinks } from "@/data/landingPageData";
 import { useCMS } from "@/contexts/CMSContext";
@@ -31,9 +32,10 @@ const Index = () => {
       console.log("Index.tsx - globalCopy.brochure_callout_headline:", globalCopy.brochure_callout_headline);
       console.log("Index.tsx - globalCopy.brochure_callout_description:", globalCopy.brochure_callout_description);
       console.log("Index.tsx - globalCopy.brochure_callout_cta_label:", globalCopy.brochure_callout_cta_label);
-      console.log("Index.tsx - globalCopy.privacy_url:", globalCopy.privacy_url); // Debug log
-      console.log("Index.tsx - globalCopy.terms_url:", globalCopy.terms_url); // Debug log
-      console.log("Index.tsx - globalCopy.cookies_url:", globalCopy.cookies_url); // Debug log
+      console.log("Index.tsx - globalCopy.master_plan_image_url:", globalCopy.master_plan_image_url); // NEW LOG
+      console.log("Index.tsx - globalCopy.privacy_url:", globalCopy.privacy_url);
+      console.log("Index.tsx - globalCopy.terms_url:", globalCopy.terms_url);
+      console.log("Index.tsx - globalCopy.cookies_url:", globalCopy.cookies_url);
     }
   }, [globalCopy]);
 
@@ -97,6 +99,9 @@ const Index = () => {
           brochureUrl={globalCopy.brochure_url}
           onBookVisitClick={() => handleNavigate("register")}
         />
+        {globalCopy.master_plan_image_url && (
+          <MasterPlanSection imageUrl={globalCopy.master_plan_image_url} />
+        )}
         <AmenitiesSection
           amenitiesTitle={globalCopy.experience_title}
           amenitiesParagraph={globalCopy.experience_paragraph}
