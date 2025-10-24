@@ -6,8 +6,9 @@ import ResidencesSection from "@/components/sections/ResidencesSection";
 import AmenitiesSection from "@/components/sections/AmenitiesSection";
 import RegisterSection from "@/components/sections/RegisterSection";
 import DestinationSection from "@/components/sections/DestinationSection";
-import BrochureCalloutSection from "@/components/sections/BrochureCalloutSection"; // Import new component
+import BrochureCalloutSection from "@/components/sections/BrochureCalloutSection";
 import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
+import Footer from "@/components/layout/Footer"; // Import the new Footer component
 import { smoothScrollTo } from "@/lib/scroll";
 import { navigationLinks } from "@/data/landingPageData";
 import { useCMS } from "@/contexts/CMSContext";
@@ -27,9 +28,12 @@ const Index = () => {
       console.log("Index.tsx - globalCopy.destination_background_image_url:", globalCopy.destination_background_image_url);
       console.log("Index.tsx - globalCopy.whatsapp_number:", globalCopy.whatsapp_number);
       console.log("Index.tsx - globalCopy.brochure_url:", globalCopy.brochure_url);
-      console.log("Index.tsx - globalCopy.brochure_callout_headline:", globalCopy.brochure_callout_headline); // Debug log
-      console.log("Index.tsx - globalCopy.brochure_callout_description:", globalCopy.brochure_callout_description); // Debug log
-      console.log("Index.tsx - globalCopy.brochure_callout_cta_label:", globalCopy.brochure_callout_cta_label); // Debug log
+      console.log("Index.tsx - globalCopy.brochure_callout_headline:", globalCopy.brochure_callout_headline);
+      console.log("Index.tsx - globalCopy.brochure_callout_description:", globalCopy.brochure_callout_description);
+      console.log("Index.tsx - globalCopy.brochure_callout_cta_label:", globalCopy.brochure_callout_cta_label);
+      console.log("Index.tsx - globalCopy.privacy_url:", globalCopy.privacy_url); // Debug log
+      console.log("Index.tsx - globalCopy.terms_url:", globalCopy.terms_url); // Debug log
+      console.log("Index.tsx - globalCopy.cookies_url:", globalCopy.cookies_url); // Debug log
     }
   }, [globalCopy]);
 
@@ -90,8 +94,8 @@ const Index = () => {
           residencesTitle={globalCopy.residences_title}
           residencesParagraph={globalCopy.residences_paragraph}
           residenceList={globalCopy.residence_list || []}
-          brochureUrl={globalCopy.brochure_url} // Pass brochureUrl
-          onBookVisitClick={() => handleNavigate("register")} // Pass handler for booking visit
+          brochureUrl={globalCopy.brochure_url}
+          onBookVisitClick={() => handleNavigate("register")}
         />
         <AmenitiesSection
           amenitiesTitle={globalCopy.experience_title}
@@ -104,6 +108,11 @@ const Index = () => {
         <FloatingWhatsAppButton whatsappNumber={globalCopy.whatsapp_number} />
       )}
       <MadeWithDyad />
+      <Footer
+        privacyUrl={globalCopy.privacy_url}
+        termsUrl={globalCopy.terms_url}
+        cookiesUrl={globalCopy.cookies_url}
+      />
     </div>
   );
 };
