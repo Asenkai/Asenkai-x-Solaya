@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
-import { MadeWithDyad } from "@/components/made-with-dyad"; // Corrected import syntax
+import { MadeWithDyad } from "@/components/made-with-dyad";
 import Header from "@/components/layout/Header";
 import HeroSection from "@/components/sections/HeroSection";
 import IntroductionSection from "@/components/sections/IntroductionSection";
 import DestinationSection from "@/components/sections/DestinationSection";
+import ResidencesSection from "@/components/sections/ResidencesSection"; // Import the new component
 import { smoothScrollTo } from "@/lib/scroll";
 
 const Index = () => {
@@ -50,6 +51,37 @@ const Index = () => {
     background_image_url: "https://www.meraas.com/-/media/project/meraassite/solaya/solaya-destination-bg.jpg", // Placeholder background image
   };
 
+  const residencesData = {
+    residences_title: "Exquisite Residences Tailored to Your Lifestyle",
+    residences_paragraph: "Choose from a selection of meticulously designed apartments and penthouses, each offering unparalleled comfort and breathtaking views.",
+    residence_list: [
+      {
+        imageUrl: "https://www.meraas.com/-/media/project/meraassite/solaya/solaya-residence-1.jpg",
+        type: "1 Bedroom Apartment",
+        size: "850 sqft",
+        description: "Spacious and elegantly designed, perfect for urban living.",
+      },
+      {
+        imageUrl: "https://www.meraas.com/-/media/project/meraassite/solaya/solaya-residence-2.jpg",
+        type: "2 Bedroom Apartment",
+        size: "1,300 sqft",
+        description: "Ideal for families, offering ample space and modern finishes.",
+      },
+      {
+        imageUrl: "https://www.meraas.com/-/media/project/meraassite/solaya/solaya-residence-3.jpg",
+        type: "3 Bedroom Apartment",
+        size: "1,800 sqft",
+        description: "Luxurious living with panoramic city views and premium amenities.",
+      },
+      {
+        imageUrl: "https://www.meraas.com/-/media/project/meraassite/solaya/solaya-residence-4.jpg",
+        type: "4 Bedroom Penthouse",
+        size: "3,500 sqft",
+        description: "The pinnacle of luxury, featuring expansive layouts and private terraces.",
+      },
+    ],
+  };
+
   const handleNavigate = (id: string) => {
     smoothScrollTo(id);
   };
@@ -78,10 +110,12 @@ const Index = () => {
         keyLocations={destinationData.key_locations}
         backgroundImageUrl={destinationData.background_image_url}
       />
+      <ResidencesSection
+        residencesTitle={residencesData.residences_title}
+        residencesParagraph={residencesData.residences_paragraph}
+        residenceList={residencesData.residence_list}
+      />
       {/* Placeholder for other sections */}
-      <section id="residences" className="min-h-screen bg-white flex items-center justify-center">
-        <h2 className="text-4xl font-bold text-primary">Residences Section (Coming Soon)</h2>
-      </section>
       <section id="amenities" className="min-h-screen bg-gray-50 flex items-center justify-center">
         <h2 className="text-4xl font-bold text-primary">Amenities Section (Coming Soon)</h2>
       </section>
