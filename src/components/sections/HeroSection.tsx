@@ -21,6 +21,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
   console.log("HeroSection received heroMediaUrl:", heroMediaUrl); // Debug log
 
+  const handleMediaError = (event: React.SyntheticEvent<HTMLImageElement | HTMLVideoElement, Event>) => {
+    console.error("Hero media failed to load:", event.currentTarget.src, event);
+  };
+
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden">
       {/* Background Media */}
@@ -32,12 +36,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           loop
           muted
           playsInline
+          onError={handleMediaError}
         />
       ) : (
         <img
           className="absolute inset-0 w-full h-full object-cover"
           src={heroMediaUrl}
           alt="Hero Background"
+          onError={handleMediaError}
         />
       )}
 

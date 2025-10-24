@@ -9,6 +9,7 @@ import DestinationSection from "@/components/sections/DestinationSection";
 import { smoothScrollTo } from "@/lib/scroll";
 import { navigationLinks } from "@/data/landingPageData";
 import { useCMS } from "@/contexts/CMSContext"; // Import useCMS
+import React from "react"; // Import React for useEffect
 
 const Index = () => {
   const { globalCopy, loading, error } = useCMS(); // Use the CMS context
@@ -16,6 +17,16 @@ const Index = () => {
   const handleNavigate = (id: string) => {
     smoothScrollTo(id);
   };
+
+  // Debugging logs for CMS data
+  React.useEffect(() => {
+    if (globalCopy) {
+      console.log("Index.tsx - globalCopy.hero_media_url:", globalCopy.hero_media_url);
+      console.log("Index.tsx - globalCopy.intro_images:", globalCopy.intro_images);
+      console.log("Index.tsx - globalCopy.destination_background_image_url:", globalCopy.destination_background_image_url);
+    }
+  }, [globalCopy]);
+
 
   if (loading) {
     return (
