@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "VITE_SUPABASE_URL=http://localhost:54321 VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp5ZWJqeXBqeGdxanhwdnlyem5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyNDYyNzksImV4cCI6MjA3NjgyMjI3OX0.gZluKDy3flqXxdqowEGlQxyHrc5-pMxWta2r-lZ916c VITE_SUPABASE_FUNCTIONS_URL=http://localhost:54321/functions/v1 vite",
-    "build": "VITE_SUPABASE_URL=https://jyebjypjxgqjxpvyrznd.supabase.co VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp5ZWJqeXBqeGdxanhwdnlycm5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyNDYyNzksImV4cCI6MjA3NjgyMjI3OX0.gZluKDy3flqXxdqowEGlQxyHrc5-pMxWta2r-lZ916c VITE_SUPABASE_FUNCTIONS_URL=https://jyebjypjxgqjxpvyrznd.supabase.co/functions/v1 vite build",
+    "dev": "cross-env VITE_SUPABASE_URL=http://localhost:54321 VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp5ZWJqeXBqeGdxanhwdnlyem5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyNDYyNzksImV4cCI6MjA3NjgyMjI3OX0.gZluKDy3flqXxdqowEGlQxyHrc5-pMxWta2r-lZ916c VITE_SUPABASE_FUNCTIONS_URL=http://localhost:54321/functions/v1 vite",
+    "build": "cross-env VITE_SUPABASE_URL=https://jyebjypjxgqjxpvyrznd.supabase.co VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp5ZWJqeXBqeGdxanhwdnlycm5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyNDYyNzksImV4cCI6MjA3NjgyMjI3OX0.gZluKDy3flqXxdqowEGlQxyHrc5-pMxWta2r-lZ916c VITE_SUPABASE_FUNCTIONS_URL=https://jyebjypjxgqjxpvyrznd.supabase.co/functions/v1 vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -28,7 +28,7 @@
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-progress": "^1.1.0",
     "@radix-ui/react-radio-group": "^1.2.0",
-    "@radix-ui/react-scroll-area": "^1.1.0",
+    "@radix-ui/react-scroll-area": "^1.2.0",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slider": "^1.2.0",
@@ -71,6 +71,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.9.0",
     "autoprefixer": "^10.4.20",
+    "cross-env": "^7.0.3",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
