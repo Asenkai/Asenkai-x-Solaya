@@ -35,6 +35,8 @@ const Index = () => {
       console.log("Index.tsx - globalCopy.brochure_callout_cta_label:", globalCopy.brochure_callout_cta_label);
       console.log("Index.tsx - globalCopy.master_plan_image_url:", globalCopy.master_plan_image_url);
       console.log("Index.tsx - globalCopy.experience_gallery:", globalCopy.experience_gallery); // NEW LOG
+      console.log("Index.tsx - globalCopy.amenities_title:", globalCopy.amenities_title); // NEW LOG
+      console.log("Index.tsx - globalCopy.amenities_paragraph:", globalCopy.amenities_paragraph); // NEW LOG
       console.log("Index.tsx - globalCopy.privacy_url:", globalCopy.privacy_url);
       console.log("Index.tsx - globalCopy.terms_url:", globalCopy.terms_url);
       console.log("Index.tsx - globalCopy.cookies_url:", globalCopy.cookies_url);
@@ -112,8 +114,8 @@ const Index = () => {
           />
         )}
         <AmenitiesSection
-          amenitiesTitle={globalCopy.experience_title}
-          amenitiesParagraph={globalCopy.experience_paragraph}
+          amenitiesTitle={globalCopy.amenities_title}
+          amenitiesParagraph={globalCopy.amenities_paragraph}
           amenityList={globalCopy.amenity_list || []}
         />
         <RegisterSection />

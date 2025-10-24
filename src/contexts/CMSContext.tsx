@@ -52,6 +52,8 @@ interface GlobalCopy {
   residence_list: Residence[]; // Added
   experience_title: string;
   experience_paragraph: string;
+  amenities_title: string; // NEW FIELD
+  amenities_paragraph: string; // NEW FIELD
   amenity_list: AmenityItem[]; // Added
   experience_gallery: ExperienceGalleryItem[]; // NEW FIELD
   privacy_url: string;
