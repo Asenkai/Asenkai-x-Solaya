@@ -90,6 +90,8 @@ const Index = () => {
           residencesTitle={globalCopy.residences_title}
           residencesParagraph={globalCopy.residences_paragraph}
           residenceList={globalCopy.residence_list || []}
+          brochureUrl={globalCopy.brochure_url} // Pass brochureUrl
+          onBookVisitClick={() => handleNavigate("register")} // Pass handler for booking visit
         />
         <AmenitiesSection
           amenitiesTitle={globalCopy.experience_title}
