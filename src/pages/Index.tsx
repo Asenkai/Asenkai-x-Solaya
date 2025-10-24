@@ -11,7 +11,7 @@ import AmenitiesSection from "@/components/sections/AmenitiesSection";
 import { smoothScrollTo } from "@/lib/scroll";
 import {
   Dumbbell,
-  SwimmingPool, // Corrected back to SwimmingPool
+  Pool, // Corrected to Pool
   Coffee,
   Leaf,
   Car,
@@ -101,7 +101,7 @@ const Index = () => {
         description: "Fully equipped fitness center with personal trainers available.",
       },
       {
-        icon: SwimmingPool, // Corrected back to SwimmingPool
+        icon: Pool, // Corrected to Pool
         title: "Infinity Pool",
         description: "Relax by the stunning infinity pool with breathtaking city views.",
       },
