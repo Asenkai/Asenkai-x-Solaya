@@ -82,11 +82,11 @@ export const CMSProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       setLoading(true);
       setError(null);
       try {
-        // Fetch global_copy
+        // Fetch global_copy by its known ID
         const { data: globalCopyData, error: globalCopyError } = await supabase
           .from('global_copy')
           .select('*')
-          .limit(1)
+          .eq('id', '00000000-0000-0000-0000-000000000001') // Explicitly query by the ID we inserted
           .single();
 
         if (globalCopyError) {
