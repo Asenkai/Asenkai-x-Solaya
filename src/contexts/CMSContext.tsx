@@ -90,6 +90,7 @@ export const CMSProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
           .single();
 
         if (globalCopyError) {
+          console.error("Supabase global_copy fetch error:", globalCopyError); // Added log
           throw new Error(globalCopyError.message);
         }
         setGlobalCopy(globalCopyData);
@@ -101,13 +102,14 @@ export const CMSProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
           .order('order', { ascending: true });
 
         if (toolkitImagesError) {
+          console.error("Supabase toolkit_images fetch error:", toolkitImagesError); // Added log
           throw new Error(toolkitImagesError.message);
         }
         setToolkitImages(toolkitImagesData || []);
 
       } catch (err: any) {
-        console.error("Error fetching CMS data:", err.message);
-        setError("Failed to load content. Please try again later.");
+        console.error("Error fetching CMS data in CMSContext:", err.message); // Updated log
+        setError("Failed to load content. Please try again later. Details: " + err.message); // Added details to error message
       } finally {
         setLoading(false);
       }
