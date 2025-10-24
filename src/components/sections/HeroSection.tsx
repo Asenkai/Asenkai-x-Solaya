@@ -19,6 +19,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   heroCtaLabel,
   heroMediaUrl,
 }) => {
+  console.log("HeroSection received heroMediaUrl:", heroMediaUrl); // Debug log
+
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden">
       {/* Background Media */}
@@ -39,8 +41,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         />
       )}
 
-      {/* Soft beige overlay - reduced opacity */}
-      <div className="absolute inset-0 bg-amber-500/10" />
+      {/* Soft beige overlay - TEMPORARILY REMOVED FOR DEBUGGING */}
+      {/* <div className="absolute inset-0 bg-amber-500/10" /> */}
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white p-4">
