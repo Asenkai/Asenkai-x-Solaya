@@ -35,7 +35,14 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, navigationLinks }) => {
       )}
     >
       <nav className="container mx-auto flex items-center justify-between p-4">
-        <div className="text-2xl font-bold">Solaya</div>
+        {/* Replaced text logo with image logo */}
+        <div className="h-10"> {/* Container for the logo to maintain height */}
+          <img
+            src="https://cdn.prod.website-files.com/67da8099f8de202cdff217eb/68db73ba37e0c7c6fc68330c_Solaya-7.jpg"
+            alt="Solaya Logo"
+            className="h-full object-contain"
+          />
+        </div>
         {/* Desktop Navigation */}
         <ul className="hidden md:flex space-x-6">
           {navigationLinks.map((link) => (
