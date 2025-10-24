@@ -8,10 +8,11 @@ import IntroductionSection from "@/components/sections/IntroductionSection";
 import DestinationSection from "@/components/sections/DestinationSection";
 import ResidencesSection from "@/components/sections/ResidencesSection";
 import AmenitiesSection from "@/components/sections/AmenitiesSection";
+import RegisterInterestForm from "@/components/forms/RegisterInterestForm.tsx"; // Explicitly added .tsx extension
 import { smoothScrollTo } from "@/lib/scroll";
 import {
   Dumbbell,
-  Droplet, // Changed from Pool to Droplet to resolve export error
+  Droplet,
   Coffee,
   Leaf,
   Car,
@@ -101,7 +102,7 @@ const Index = () => {
         description: "Fully equipped fitness center with personal trainers available.",
       },
       {
-        icon: Droplet, // Changed from Pool to Droplet
+        icon: Droplet,
         title: "Infinity Pool",
         description: "Relax by the stunning infinity pool with breathtaking city views.",
       },
@@ -166,8 +167,8 @@ const Index = () => {
         amenitiesParagraph={amenitiesData.amenities_paragraph}
         amenityList={amenitiesData.amenity_list}
       />
-      <section id="register" className="min-h-screen bg-white flex items-center justify-center">
-        <h2 className="text-4xl font-bold text-primary">Register Your Interest Form (Coming Soon)</h2>
+      <section id="register" className="min-h-screen bg-gray-100 flex items-center justify-center py-20 px-4">
+        <RegisterInterestForm />
       </section>
       <MadeWithDyad />
     </div>
