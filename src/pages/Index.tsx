@@ -7,19 +7,31 @@ import AmenitiesSection from "@/components/sections/AmenitiesSection";
 import RegisterSection from "@/components/sections/RegisterSection";
 import DestinationSection from "@/components/sections/DestinationSection";
 import { smoothScrollTo } from "@/lib/scroll";
-import {
-  heroData,
-  introData,
-  residencesData,
-  amenitiesData,
-  destinationData,
-  navigationLinks,
-} from "@/data/landingPageData";
+import { navigationLinks } from "@/data/landingPageData";
+import { useCMS } from "@/contexts/CMSContext"; // Import useCMS
 
 const Index = () => {
+  const { globalCopy, loading, error } = useCMS(); // Use the CMS context
+
   const handleNavigate = (id: string) => {
     smoothScrollTo(id);
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-xl text-gray-700">Loading content...</p>
+      </div>
+    );
+  }
+
+  if (error || !globalCopy) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-xl text-red-500">Error: {error || "CMS data not available."}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -27,34 +39,34 @@ const Index = () => {
       <main className="flex-grow">
         <HeroSection
           onRegisterClick={() => handleNavigate("register")}
-          heroHeadline={heroData.hero_headline}
-          heroSubheadline={heroData.hero_subheadline}
-          heroCtaLabel={heroData.hero_cta_label}
-          heroMediaUrl={heroData.hero_media_url}
+          heroHeadline={globalCopy.hero_headline}
+          heroSubheadline={globalCopy.hero_subheadline}
+          heroCtaLabel={globalCopy.hero_cta_label}
+          heroMediaUrl={globalCopy.hero_media_url}
         />
         <IntroductionSection
           onDiscoverClick={() => handleNavigate("residences")}
-          introTitle={introData.intro_title}
-          introRichText={introData.intro_rich_text}
-          introButtonLabel={introData.intro_button_label}
-          introImages={introData.intro_images}
+          introTitle={globalCopy.intro_title}
+          introRichText={globalCopy.intro_rich_text}
+          introButtonLabel={globalCopy.intro_button_label}
+          introImages={globalCopy.intro_images || []}
         />
         <DestinationSection
-          destinationTitle={destinationData.destination_title}
-          destinationParagraph={destinationData.destination_paragraph}
-          destinationPlaces={destinationData.destination_places}
-          keyLocations={destinationData.key_locations}
-          backgroundImageUrl={destinationData.background_image_url}
+          destinationTitle={globalCopy.destination_title}
+          destinationParagraph={globalCopy.destination_paragraph}
+          destinationPlaces={globalCopy.destination_places || []}
+          keyLocations={globalCopy.key_locations || []}
+          backgroundImageUrl={globalCopy.destination_background_image_url || ""}
         />
         <ResidencesSection
-          residencesTitle={residencesData.residences_title}
-          residencesParagraph={residencesData.residences_paragraph}
-          residenceList={residencesData.residence_list}
+          residencesTitle={globalCopy.residences_title}
+          residencesParagraph={globalCopy.residences_paragraph}
+          residenceList={globalCopy.residence_list || []}
         />
         <AmenitiesSection
-          amenitiesTitle={amenitiesData.amenities_title}
-          amenitiesParagraph={amenitiesData.amenities_paragraph}
-          amenityList={amenitiesData.amenity_list}
+          amenitiesTitle={globalCopy.experience_title}
+          amenitiesParagraph={globalCopy.experience_paragraph}
+          amenityList={globalCopy.amenity_list || []}
         />
         <RegisterSection />
       </main>

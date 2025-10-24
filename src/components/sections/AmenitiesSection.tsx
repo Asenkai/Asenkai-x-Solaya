@@ -2,10 +2,11 @@
 
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LucideIcon } from "lucide-react"; // Import LucideIcon type
+import * as LucideIcons from "lucide-react"; // Import all Lucide icons
 
-interface Amenity {
-  icon: LucideIcon; // Using LucideIcon type for dynamic icons
+// Define the AmenityItem type to match the CMS data structure
+interface AmenityItem {
+  icon_name: string; // Storing icon name as string
   title: string;
   description: string;
 }
@@ -13,8 +14,14 @@ interface Amenity {
 interface AmenitiesSectionProps {
   amenitiesTitle: string;
   amenitiesParagraph: string;
-  amenityList: Amenity[];
+  amenityList: AmenityItem[]; // Use AmenityItem type
 }
+
+// Helper to get Lucide icon component by name
+const getLucideIcon = (iconName: string): LucideIcons.LucideIcon | null => {
+  const IconComponent = (LucideIcons as any)[iconName];
+  return IconComponent || null;
+};
 
 const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({
   amenitiesTitle,
@@ -35,17 +42,20 @@ const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({
 
         {amenityList.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {amenityList.map((amenity, index) => (
-              <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 text-center p-6">
-                <CardHeader className="flex flex-col items-center pb-4">
-                  <amenity.icon className="h-12 w-12 text-primary mb-4" />
-                  <CardTitle className="text-xl font-semibold text-primary">{amenity.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">{amenity.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+            {amenityList.map((amenity, index) => {
+              const IconComponent = getLucideIcon(amenity.icon_name);
+              return (
+                <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 text-center p-6">
+                  <CardHeader className="flex flex-col items-center pb-4">
+                    {IconComponent && <IconComponent className="h-12 w-12 text-primary mb-4" />}
+                    <CardTitle className="text-xl font-semibold text-primary">{amenity.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">{amenity.description}</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         )}
       </div>
