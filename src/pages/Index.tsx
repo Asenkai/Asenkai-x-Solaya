@@ -8,7 +8,7 @@ import IntroductionSection from "@/components/sections/IntroductionSection";
 import DestinationSection from "@/components/sections/DestinationSection";
 import ResidencesSection from "@/components/sections/ResidencesSection";
 import AmenitiesSection from "@/components/sections/AmenitiesSection";
-import RegisterInterestForm from "@/components/forms/RegisterInterestForm.tsx";
+import RegisterSection from "@/components/sections/RegisterSection"; // Import the new RegisterSection
 import { smoothScrollTo } from "@/lib/scroll";
 import {
   heroData,
@@ -16,7 +16,7 @@ import {
   destinationData,
   residencesData,
   amenitiesData,
-} from "../data/landingPageData.ts"; // Changed to relative path
+} from "../data/landingPageData.ts";
 
 const Index = () => {
   const handleNavigate = (id: string) => {
@@ -57,9 +57,7 @@ const Index = () => {
         amenitiesParagraph={amenitiesData.amenities_paragraph}
         amenityList={amenitiesData.amenity_list}
       />
-      <section id="register" className="min-h-screen bg-gray-100 flex items-center justify-center py-20 px-4">
-        <RegisterInterestForm />
-      </section>
+      <RegisterSection /> {/* Use the new RegisterSection component */}
       <MadeWithDyad />
     </div>
   );
