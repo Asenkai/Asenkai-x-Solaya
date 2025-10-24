@@ -8,14 +8,30 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  console.log('Edge Function leads-post invoked!'); // Log when the function is called
+
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    const supabaseUrl = Deno.env.get('SUPABASE_URL');
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY');
+
+    console.log('SUPABASE_URL in Edge Function:', supabaseUrl ? 'Set' : 'Not Set'); // Log status of SUPABASE_URL
+    console.log('SUPABASE_ANON_KEY in Edge Function:', supabaseAnonKey ? 'Set' : 'Not Set'); // Log status of SUPABASE_ANON_KEY
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+      console.error('Supabase environment variables are not set in Edge Function.');
+      return new Response(JSON.stringify({ error: 'Supabase environment variables missing in Edge Function.' }), {
+        status: 500,
+        headers: corsHeaders,
+      });
+    }
+
     const supabaseClient = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      supabaseUrl,
+      supabaseAnonKey,
       {
         global: { headers: { 'x-my-custom-header': 'leads-post' } },
       }
@@ -95,9 +111,9 @@ serve(async (req) => {
       status: 200,
       headers: corsHeaders,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Edge Function error:', error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: error.message || 'An unknown error occurred in the Edge Function.' }), {
       status: 500,
       headers: corsHeaders,
     });
