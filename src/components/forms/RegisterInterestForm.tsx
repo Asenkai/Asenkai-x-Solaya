@@ -19,6 +19,7 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { showSuccess, showError } from "@/utils/toast";
+import CountrySelect from "./CountrySelect"; // Import the new component
 
 // Define the schema for the form
 const formSchema = z.object({
@@ -178,19 +179,14 @@ const RegisterInterestForm: React.FC = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Code</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Code" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="+971">UAE (+971)</SelectItem>
-                        <SelectItem value="+1">USA (+1)</SelectItem>
-                        <SelectItem value="+44">UK (+44)</SelectItem>
-                        {/* Add more country codes as needed */}
-                      </SelectContent>
-                    </Select>
+                    <FormControl>
+                      <CountrySelect
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder="Select code"
+                        type="phoneCode"
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -216,20 +212,14 @@ const RegisterInterestForm: React.FC = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Country of Residence</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your country" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="UAE">United Arab Emirates</SelectItem>
-                      <SelectItem value="USA">United States</SelectItem>
-                      <SelectItem value="UK">United Kingdom</SelectItem>
-                      <SelectItem value="KSA">Kingdom of Saudi Arabia</SelectItem>
-                      {/* Add more countries as needed */}
-                    </SelectContent>
-                  </Select>
+                  <FormControl>
+                    <CountrySelect
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="Select your country"
+                      type="country"
+                    />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
