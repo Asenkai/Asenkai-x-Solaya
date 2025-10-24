@@ -6,7 +6,8 @@ import ResidencesSection from "@/components/sections/ResidencesSection";
 import AmenitiesSection from "@/components/sections/AmenitiesSection";
 import RegisterSection from "@/components/sections/RegisterSection";
 import DestinationSection from "@/components/sections/DestinationSection";
-import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton"; // Import new component
+import BrochureCalloutSection from "@/components/sections/BrochureCalloutSection"; // Import new component
+import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
 import { smoothScrollTo } from "@/lib/scroll";
 import { navigationLinks } from "@/data/landingPageData";
 import { useCMS } from "@/contexts/CMSContext";
@@ -24,8 +25,11 @@ const Index = () => {
       console.log("Index.tsx - globalCopy.hero_media_url:", globalCopy.hero_media_url);
       console.log("Index.tsx - globalCopy.intro_images:", globalCopy.intro_images);
       console.log("Index.tsx - globalCopy.destination_background_image_url:", globalCopy.destination_background_image_url);
-      console.log("Index.tsx - globalCopy.whatsapp_number:", globalCopy.whatsapp_number); // Debug log
-      console.log("Index.tsx - globalCopy.brochure_url:", globalCopy.brochure_url); // Debug log
+      console.log("Index.tsx - globalCopy.whatsapp_number:", globalCopy.whatsapp_number);
+      console.log("Index.tsx - globalCopy.brochure_url:", globalCopy.brochure_url);
+      console.log("Index.tsx - globalCopy.brochure_callout_headline:", globalCopy.brochure_callout_headline); // Debug log
+      console.log("Index.tsx - globalCopy.brochure_callout_description:", globalCopy.brochure_callout_description); // Debug log
+      console.log("Index.tsx - globalCopy.brochure_callout_cta_label:", globalCopy.brochure_callout_cta_label); // Debug log
     }
   }, [globalCopy]);
 
@@ -51,8 +55,8 @@ const Index = () => {
       <Header
         onNavigate={handleNavigate}
         navigationLinks={navigationLinks}
-        whatsappNumber={globalCopy.whatsapp_number} // Pass to Header
-        brochureUrl={globalCopy.brochure_url} // Pass to Header
+        whatsappNumber={globalCopy.whatsapp_number}
+        brochureUrl={globalCopy.brochure_url}
       />
       <main className="flex-grow">
         <HeroSection
@@ -68,6 +72,12 @@ const Index = () => {
           introRichText={globalCopy.intro_rich_text}
           introButtonLabel={globalCopy.intro_button_label}
           introImages={globalCopy.intro_images || []}
+        />
+        <BrochureCalloutSection
+          headline={globalCopy.brochure_callout_headline}
+          description={globalCopy.brochure_callout_description}
+          ctaLabel={globalCopy.brochure_callout_cta_label}
+          brochureUrl={globalCopy.brochure_url}
         />
         <DestinationSection
           destinationTitle={globalCopy.destination_title}

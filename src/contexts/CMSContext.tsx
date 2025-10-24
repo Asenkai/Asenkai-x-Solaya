@@ -54,6 +54,9 @@ interface GlobalCopy {
   gtm_container_id: string;
   whatsapp_number: string | null; // Added WhatsApp number
   brochure_url: string | null; // Added Brochure URL
+  brochure_callout_headline: string | null; // New field
+  brochure_callout_description: string | null; // New field
+  brochure_callout_cta_label: string | null; // New field
 }
 
 interface ToolkitImage {
