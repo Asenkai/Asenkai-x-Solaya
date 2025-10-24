@@ -6,12 +6,18 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+interface NavLink {
+  id: string;
+  label: string;
+}
+
 interface MobileNavProps {
   onNavigate: (id: string) => void;
   isScrolled: boolean;
+  navigationLinks: NavLink[];
 }
 
-const MobileNav: React.FC<MobileNavProps> = ({ onNavigate, isScrolled }) => {
+const MobileNav: React.FC<MobileNavProps> = ({ onNavigate, isScrolled, navigationLinks }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleLinkClick = (id: string) => {
@@ -36,24 +42,16 @@ const MobileNav: React.FC<MobileNavProps> = ({ onNavigate, isScrolled }) => {
       </SheetTrigger>
       <SheetContent side="left" className="w-[250px] sm:w-[300px] bg-white p-6">
         <div className="flex flex-col space-y-4 pt-8">
-          <Button variant="ghost" className="text-lg justify-start text-primary" onClick={() => handleLinkClick("hero")}>
-            Home
-          </Button>
-          <Button variant="ghost" className="text-lg justify-start text-primary" onClick={() => handleLinkClick("introduction")}>
-            Introduction
-          </Button>
-          <Button variant="ghost" className="text-lg justify-start text-primary" onClick={() => handleLinkClick("destination")}>
-            Destination
-          </Button>
-          <Button variant="ghost" className="text-lg justify-start text-primary" onClick={() => handleLinkClick("residences")}>
-            Residences
-          </Button>
-          <Button variant="ghost" className="text-lg justify-start text-primary" onClick={() => handleLinkClick("amenities")}>
-            Amenities
-          </Button>
-          <Button variant="ghost" className="text-lg justify-start text-primary" onClick={() => handleLinkClick("register")}>
-            Register
-          </Button>
+          {navigationLinks.map((link) => (
+            <Button
+              key={link.id}
+              variant="ghost"
+              className="text-lg justify-start text-primary"
+              onClick={() => handleLinkClick(link.id)}
+            >
+              {link.label}
+            </Button>
+          ))}
           <Button className="bg-primary text-white hover:bg-primary/90 text-lg px-8 py-6 rounded-full font-semibold mt-4" onClick={() => handleLinkClick("register")}>
             Register Now
           </Button>

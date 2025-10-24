@@ -109,3 +109,12 @@ export const amenitiesData = {
     },
   ],
 };
+
+export const navigationLinks = [
+  { id: "hero", label: "Home" },
+  { id: "introduction", label: "Introduction" },
+  { id: "destination", label: "Destination" },
+  { id: "residences", label: "Residences" },
+  { id: "amenities", label: "Amenities" },
+  { id: "register", label: "Register" },
+];

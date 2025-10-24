@@ -3,13 +3,19 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import MobileNav from "./MobileNav"; // Import the new MobileNav component
+import MobileNav from "./MobileNav";
+
+interface NavLink {
+  id: string;
+  label: string;
+}
 
 interface HeaderProps {
   onNavigate: (id: string) => void;
+  navigationLinks: NavLink[];
 }
 
-const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
+const Header: React.FC<HeaderProps> = ({ onNavigate, navigationLinks }) => {
   const [isScrolled, setIsScrolled] = React.useState(false);
 
   React.useEffect(() => {
@@ -32,36 +38,17 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
         <div className="text-2xl font-bold">Solaya</div>
         {/* Desktop Navigation */}
         <ul className="hidden md:flex space-x-6">
-          <li>
-            <Button variant="link" className={cn("text-lg", isScrolled ? "text-primary" : "text-white")} onClick={() => onNavigate("hero")}>
-              Home
-            </Button>
-          </li>
-          <li>
-            <Button variant="link" className={cn("text-lg", isScrolled ? "text-primary" : "text-white")} onClick={() => onNavigate("introduction")}>
-              Introduction
-            </Button>
-          </li>
-          <li>
-            <Button variant="link" className={cn("text-lg", isScrolled ? "text-primary" : "text-white")} onClick={() => onNavigate("destination")}>
-              Destination
-            </Button>
-          </li>
-          <li>
-            <Button variant="link" className={cn("text-lg", isScrolled ? "text-primary" : "text-white")} onClick={() => onNavigate("residences")}>
-              Residences
-            </Button>
-          </li>
-          <li>
-            <Button variant="link" className={cn("text-lg", isScrolled ? "text-primary" : "text-white")} onClick={() => onNavigate("amenities")}>
-              Amenities
-            </Button>
-          </li>
-          <li>
-            <Button variant="link" className={cn("text-lg", isScrolled ? "text-primary" : "text-white")} onClick={() => onNavigate("register")}>
-              Register
-            </Button>
-          </li>
+          {navigationLinks.map((link) => (
+            <li key={link.id}>
+              <Button
+                variant="link"
+                className={cn("text-lg", isScrolled ? "text-primary" : "text-white")}
+                onClick={() => onNavigate(link.id)}
+              >
+                {link.label}
+              </Button>
+            </li>
+          ))}
         </ul>
         <Button className={cn("hidden md:block", isScrolled ? "bg-primary text-white hover:bg-primary/90" : "bg-white text-primary hover:bg-gray-100")} onClick={() => onNavigate("register")}>
           Register Now
@@ -69,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
 
         {/* Mobile Navigation */}
         <div className="md:hidden">
-          <MobileNav onNavigate={onNavigate} isScrolled={isScrolled} />
+          <MobileNav onNavigate={onNavigate} isScrolled={isScrolled} navigationLinks={navigationLinks} />
         </div>
       </nav>
     </header>
