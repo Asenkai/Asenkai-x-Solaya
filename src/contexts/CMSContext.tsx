@@ -16,7 +16,7 @@ interface KeyLocation {
 }
 
 interface Residence {
-  imageUrl: string;
+  imageUrls: string[]; // Changed from imageUrl: string to imageUrls: string[]
   type: string;
   size: string;
   description: string;

@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/carousel";
 
 interface Residence {
-  imageUrl: string;
+  imageUrls: string[]; // Changed to array
   type: string;
   size: string;
   description: string;
@@ -74,11 +74,27 @@ const ResidencesSection: React.FC<ResidencesSectionProps> = ({
               {residenceList.map((residence, index) => (
                 <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
                   <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
-                    <img
-                      src={residence.imageUrl}
-                      alt={residence.type}
-                      className="w-full h-60 object-cover"
-                    />
+                    {residence.imageUrls && residence.imageUrls.length > 0 && (
+                      <Carousel className="w-full">
+                        <CarouselContent>
+                          {residence.imageUrls.map((imageUrl, imgIndex) => (
+                            <CarouselItem key={imgIndex}>
+                              <img
+                                src={imageUrl}
+                                alt={`${residence.type} image ${imgIndex + 1}`}
+                                className="w-full h-60 object-cover"
+                              />
+                            </CarouselItem>
+                          ))}
+                        </CarouselContent>
+                        {residence.imageUrls.length > 1 && (
+                          <>
+                            <CarouselPrevious className="left-2" />
+                            <CarouselNext className="right-2" />
+                          </>
+                        )}
+                      </Carousel>
+                    )}
                     <CardHeader>
                       <CardTitle className="text-2xl font-semibold text-primary">{residence.type}</CardTitle>
                     </CardHeader>
