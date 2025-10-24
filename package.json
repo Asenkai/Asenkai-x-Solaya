@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "VITE_SUPABASE_FUNCTIONS_URL=http://localhost:54321/functions/v1 vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
