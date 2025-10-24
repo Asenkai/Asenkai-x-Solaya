@@ -12,7 +12,7 @@ import ExperienceSolayaSection from "@/components/sections/ExperienceSolayaSecti
 import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
 import Footer from "@/components/layout/Footer";
 import { smoothScrollTo } from "@/lib/scroll";
-import { navigationLinks } from "@/data/landingPageData";
+import { navigationLinks } from "@/data/landingPageData"; // Using the updated navigationLinks
 import { useCMS } from "@/contexts/CMSContext";
 import React from "react";
 
@@ -104,11 +104,13 @@ const Index = () => {
         {globalCopy.master_plan_image_url && (
           <MasterPlanSection imageUrl={globalCopy.master_plan_image_url} />
         )}
-        <ExperienceSolayaSection // NEW COMPONENT
-          experienceTitle={globalCopy.experience_title}
-          experienceParagraph={globalCopy.experience_paragraph}
-          experienceGallery={globalCopy.experience_gallery || []}
-        />
+        {globalCopy.experience_gallery && globalCopy.experience_gallery.length > 0 && (
+          <ExperienceSolayaSection
+            title={globalCopy.experience_title}
+            paragraph={globalCopy.experience_paragraph}
+            galleryItems={globalCopy.experience_gallery}
+          />
+        )}
         <AmenitiesSection
           amenitiesTitle={globalCopy.experience_title}
           amenitiesParagraph={globalCopy.experience_paragraph}

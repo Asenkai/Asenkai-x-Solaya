@@ -6,7 +6,7 @@ export const navigationLinks = [
   { id: "introduction", label: "Introduction" },
   { id: "destination", label: "Destination" },
   { id: "residences", label: "Residences" },
-  { id: "experience", label: "Experience" }, // NEW NAVIGATION LINK
+  { id: "experience", label: "Experience" }, // NEW LINK
   { id: "amenities", label: "Amenities" },
   { id: "register", label: "Register" },
 ];
