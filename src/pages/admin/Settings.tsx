@@ -3,6 +3,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import ToolkitImageManager from '@/components/admin/ToolkitImageManager';
+import BrokerAgencyManager from '@/components/admin/BrokerAgencyManager'; // Import the new component
 
 const AdminSettings: React.FC = () => {
   return (
@@ -19,16 +20,7 @@ const AdminSettings: React.FC = () => {
 
       <ToolkitImageManager />
 
-      {/* TODO: Implement CSV upload for broker agencies */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Broker Agencies</CardTitle>
-          <CardDescription>Upload and manage broker agencies via CSV.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Broker agency management will be implemented here. (Coming soon!)</p>
-        </CardContent>
-      </Card>
+      <BrokerAgencyManager /> {/* Integrate the new component */}
     </div>
   );
 };
