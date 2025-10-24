@@ -19,7 +19,8 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { showSuccess, showError } from "@/utils/toast";
-import CountrySelect from "./CountrySelect"; // Import the new component
+import CountrySelect from "./CountrySelect";
+import { useCMS } from "@/contexts/CMSContext"; // Import useCMS
 
 // Define the schema for the form
 const formSchema = z.object({
@@ -52,7 +53,7 @@ const formSchema = z.object({
   }),
   brokerAssisted: z.boolean(),
   brokerType: z.string().optional(),
-  brokerAgency: z.string().optional(),
+  brokerAgency: z.string().optional(), // This will now be selected from a list
   consent: z.boolean().refine((val) => val === true, {
     message: "You must consent to receive communications.",
   }),
@@ -60,6 +61,8 @@ const formSchema = z.object({
 });
 
 const RegisterInterestForm: React.FC = () => {
+  const { brokerAgencies } = useCMS(); // Use brokerAgencies from CMSContext
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -210,18 +213,18 @@ const RegisterInterestForm: React.FC = () => {
               control={form.control}
               name="countryResidence"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Country of Residence</FormLabel>
-                  <FormControl>
-                    <CountrySelect
-                      value={field.value}
-                      onChange={field.onChange}
-                      placeholder="Select your country"
-                      type="country"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
+                  <FormItem>
+                    <FormLabel>Country of Residence</FormLabel>
+                    <FormControl>
+                      <CountrySelect
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder="Select your country"
+                        type="country"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
               )}
             />
 
@@ -346,9 +349,20 @@ const RegisterInterestForm: React.FC = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Broker Agency (Optional)</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Broker Agency Name" {...field} />
-                      </FormControl>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select broker agency" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {brokerAgencies.map((agency) => (
+                            <SelectItem key={agency.id} value={agency.name}>
+                              {agency.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}

@@ -67,9 +67,15 @@ interface ToolkitImage {
   order: number;
 }
 
+interface BrokerAgency {
+  id: string;
+  name: string;
+}
+
 interface CMSContextType {
   globalCopy: GlobalCopy | null;
   toolkitImages: ToolkitImage[];
+  brokerAgencies: BrokerAgency[]; // Added brokerAgencies to context
   loading: boolean;
   error: string | null;
 }
@@ -79,6 +85,7 @@ const CMSContext = createContext<CMSContextType | undefined>(undefined);
 export const CMSProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [globalCopy, setGlobalCopy] = useState<GlobalCopy | null>(null);
   const [toolkitImages, setToolkitImages] = useState<ToolkitImage[]>([]);
+  const [brokerAgencies, setBrokerAgencies] = useState<BrokerAgency[]>([]); // State for broker agencies
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -112,6 +119,18 @@ export const CMSProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         }
         setToolkitImages(toolkitImagesData || []);
 
+        // Fetch broker_agencies
+        const { data: brokerAgenciesData, error: brokerAgenciesError } = await supabase
+          .from('broker_agencies')
+          .select('id, name')
+          .order('name', { ascending: true });
+
+        if (brokerAgenciesError) {
+          console.error("Supabase broker_agencies fetch error:", brokerAgenciesError);
+          throw new Error(brokerAgenciesError.message);
+        }
+        setBrokerAgencies(brokerAgenciesData || []);
+
       } catch (err: any) {
         console.error("Error fetching CMS data in CMSContext:", err.message); // Updated log
         setError("Failed to load content. Please try again later. Details: " + err.message); // Added details to error message
@@ -124,7 +143,7 @@ export const CMSProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }, []);
 
   return (
-    <CMSContext.Provider value={{ globalCopy, toolkitImages, loading, error }}>
+    <CMSContext.Provider value={{ globalCopy, toolkitImages, brokerAgencies, loading, error }}>
       {children}
     </CMSContext.Provider>
   );
